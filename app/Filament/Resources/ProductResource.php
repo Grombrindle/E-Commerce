@@ -70,7 +70,8 @@ class ProductResource extends Resource
                                 ->multiple()
                                 ->directory('products')
                                 ->maxFiles(5)
-                                ->preserveFilenames()
+                                // ->appendFiles()
+                                // ->preserveFilenames()
                                 ->reorderable(),
                         ])
                     ])->columnSpan(2),
@@ -116,7 +117,7 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('Name')
+                TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('category.name')
                     ->searchable(),
