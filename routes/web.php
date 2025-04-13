@@ -27,11 +27,10 @@ Route::get("/login-page", MyOrderDetailPage::class);
 
 
 Route::middleware('guest')->group(function () {
-
     Route::get("/login", LoginPage::class);
     Route::get("/register", RegisterPage::class);
-    Route::get("/forgot", ForgotPasswordPage::class);
-    Route::get("/reset", ResetPasswordPage::class);
+    Route::get("/forgot", ForgotPasswordPage::class)->name('password.request');
+    Route::get("/reset/{token}", ResetPasswordPage::class)->name('password.reset');
 });
 
 
