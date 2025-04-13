@@ -13,20 +13,22 @@ class LoginPage extends Component
     public $password;
 
 
+
     public function save()
     {
-        $user = $this->validate([
-            "email" => ["required", "email", "unique:users", "max:255",],
+        $credentials = $this->validate([
+            "email" => ["required", "email", "max:255", "exists:users"],
             "password" => ["required", "max:255", "min:6"],
         ]);
-        if (Auth::attempt($user)) {
-            Auth::login($user);
+
+        if (Auth::attempt($credentials)) {
             return redirect()->intended();
-        } else {
-            session()->flash("error", "invalid info");
-            return;
         }
+
+        session()->flash("error", "Invalid credentials");
+        return;
     }
+
 
     public function render()
     {
